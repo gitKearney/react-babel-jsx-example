@@ -9,63 +9,57 @@ import {sendRequest} from './lib/http_request';
  */
 function InputForm() {
 
-  // keeps track of the value of the email input field. We intialize the value
-  // to ''. setEmail is a function to set the value of email
-  const [email, setEmail] = React.useState(''); 
-  
-  // keeps track of the value of the password input field. We intialize the
-  // value to ''. setPassword is a function to set the value of the password
+  // State Hooks - set state of component.
+  // The 1st param is variable name (it's immutable)
+  // The 2nd param is the method to update its value - called from event handlers
+  const [email    , setEmail]   = React.useState(''); 
   const [password, setPassword] = React.useState('');  
-
-
-  // sets the type of the input field "password" either to password or text
-  // setDisplayPass is a function that sets the value of displayPass
-  const [displayPass, setDisplayPass] = React.useState('password');
-
-  // sets whether or not the submit button is clickable or not
-  // setDisabled is a method that sets disabled to either true or false
+  const [showPass, setShowPass] = React.useState('password');
   const [disabled, setDisabled] = React.useState(true);
 
-  /**
-   * @description if the email input field and the password input field contain 
-   * values, allow the form to be submitted
-   * @returns {void}
-   */
+  // event handlers - called when user makes changes, and updates our component's state
   function canBeSubmitted() {
-    if (email.length && password.length) {
-      return setDisabled(false);
-    }
-    return setDisabled(true);
+    let notEmpty = email.length && password.length;
+    return setDisabled(notEmpty);
   }
-
-  /**
-   * @description read the value of the input field "email" and strip out any
-   *  spaces then update the component's state of email
-   * @param {Event} event 
-   */
+  
   function updateEmail(event) {
     const newValue = event.target.value;
     setEmail(newValue.replace(/\s/g, ''));
   }
 
-  /**
-   * @description read the value of the input field "password" then update the
-   * component's state password
-   * @param {Event} event 
-   */
   function updatePassword(event) {
     setPassword(event.target.value);
   }
 
+  // refs - DOM nodes that we will do something with. Think of this like document.getElementyById
+  const textInput = React.createRef();
+
+  // ref handlers - called when you want to modify an element without updating state
+  function focusTextInput() {
+    // in this example - we want the "ref" (reference to input email) to be 
+    // auto-focused when the page loads.
+    textInput.current.focus();
+  }
+
   /**
-   * @description sends and HTTP POST request to localhost. Simply to demonstrate
-   * how to use an external library and how to use Fetch API
+   * @description sends an HTTP POST request. Demo of how to use an external library & Fetch API
    * @returns {void}
    */
   function sendHttpRequest() {
     sendRequest({email: email, password: password, });
   }
 
+  // Effect Hooks - side affects to the user making changes or other changes
+
+  // This effect is run, it sets the focus on the input "email". Since, we don't
+  //  want it to run again (unless the page is reloaded), we pass in an empty 
+  // array. that array says "don't run unless the value passed in changes".
+  // Since there's no value passed in, the result is always false and this hook
+  // is never run again
+  React.useEffect(focusTextInput, []);
+
+  // The effect runs whenver
   React.useEffect(canBeSubmitted);
 
   return (
@@ -75,7 +69,8 @@ function InputForm() {
       <div class="mb-3">
         <label for="emailFormControlInput1" class="form-label">Email address</label>
         <input type="email" class="form-control" id="emailFormControlInput1" 
-               placeholder="name@example.com" value={email} onChange={updateEmail} />
+               placeholder="name@example.com" value={email} onChange={updateEmail}
+               ref={textInput} />
       </div>
 
       {/* password field */}
@@ -84,12 +79,12 @@ function InputForm() {
         <button class="btn btn-outline-secondary dropdown-toggle" 
                 type="button" data-bs-toggle="dropdown" 
                 aria-expanded="false"
-        >{displayPass === 'password'? 'show' : 'hide'}  password</button>
+        >{showPass === 'password'? 'show' : 'hide'}  password</button>
         <ul class="dropdown-menu">
-          <li class="dropdown-item" onClick={() => setDisplayPass('text')}>Show</li>
-          <li class="dropdown-item" onClick={() => setDisplayPass('password')}>Obfuscated</li>
+          <li class="dropdown-item" onClick={() => setShowPass('text')}>Show</li>
+          <li class="dropdown-item" onClick={() => setShowPass('password')}>Hide</li>
         </ul>
-        <input type={displayPass} class="form-control" aria-label="Text input with dropdown button" 
+        <input type={showPass} class="form-control" aria-label="Text input with dropdown button" 
                id="passwordFormControlInput1" value={password} onChange={updatePassword} />
       </div>
 
