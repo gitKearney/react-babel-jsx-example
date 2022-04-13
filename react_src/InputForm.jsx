@@ -59,7 +59,9 @@ function InputForm() {
   // is never run again
   React.useEffect(focusTextInput, []);
 
-  // The effect runs whenver
+  // The effect runs whenver a state variable changes. Only 3 state variables
+  // can be changed by the user: email, password, and showPassword. When any
+  // those change, this effect is run
   React.useEffect(canBeSubmitted);
 
   return (
