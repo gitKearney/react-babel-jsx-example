@@ -7,21 +7,21 @@ Many front-end devs know how to create a react web app with `create-react-app` b
  * it creates source maps which makes debugging easier
  * it minifies and uglifies your js code into a single JS file
  
-However, C.R.A. is huge. the directory created by C.R.A. is something like 175MB!
-C.R.A. combines your JS and CSS into 1 giant JS and CSS file respectively and serves them up in pieces. But we can do better. Why download JS code when we don't need them?
-C.R.A. serves on port 3000 and that cannot be changed!!!
+However
+ * C.R.A. is huge - the directory created by C.R.A. is over 175MB!
+ * C.R.A. combines your JS and CSS into 1 giant JS and CSS file respectively and serves them up in pieces
+ * C.R.A. runs on port 3000 and it's **VERY** difficult to change the port no
 
-## STEPS TO PREP
-To prep the code to run
+Additionally, with CRA, we loose the best part of React - adding it to one web-page at a time
 
- * Download the [React library files](https://reactjs.org/docs/cdn-links.html) and put them in *js/src/*.
-    * react.production.min.js
-    * react-dom.production.min.js
- * write ReactJS code in the directory *react_src*. React files **must** have a _.jsx_ extension
+## SETUP
+For this example, our React development code will live in the directory *react_src*.
+Additionally, each react file **must** have a _.jsx_ extension
 
 ## HOW TO RUN
 These are the steps on how to run this ReactJS example
 
+ * `npm install` this only needs to be run once! after that, you can ignore this step. 
  * `npm run build` transpiles your JSX into JS and put the transpiled code in the _js/src/_ dir
  * `npm run start` starts the nodeJS server on port 8080 by default. But, by passing in a number we can change the listening port
 

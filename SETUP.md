@@ -1,6 +1,11 @@
 # Setup
 Notes on how this is set up
 
+# GET REACT
+Download the [React library files](https://reactjs.org/docs/cdn-links.html) and put them in *js/src/*
+  * react.production.min.js
+  * react-dom.production.min.js
+
 # Babel
 The following commands will download babel for us to transpile JSX code to JS code
 

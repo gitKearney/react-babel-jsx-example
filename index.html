@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Hello World</title>
-
-    <script type="text/javascript" src="js/react.production.min.js"></script>
-    <script type="text/javascript" src="js/react-dom.production.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-
-    <!-- react JS code -->
-    <script type="module" src="js/src/App.js"></script>
-
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="main">
+      <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Non-React Page</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            This page contains NO REACT code, but links to a page that DOES!
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">The Login Page contains react</button>
+            <a href="/login.html" type="button" class="btn btn-primary btn-lg px-4">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
