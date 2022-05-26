@@ -19,8 +19,8 @@ function InputForm() {
 
   // event handlers - called when user makes changes, and updates our component's state
   function canBeSubmitted() {
-    let notEmpty = email.length && password.length;
-    return setDisabled(notEmpty);
+    let empty = email.length && password.length ? false : true;
+    return setDisabled(empty);
   }
   
   function updateEmail(event) {
@@ -62,7 +62,7 @@ function InputForm() {
   // The effect runs whenver a state variable changes. Only 3 state variables
   // can be changed by the user: email, password, and showPassword. When any
   // those change, this effect is run
-  React.useEffect(canBeSubmitted);
+  React.useEffect(canBeSubmitted, [email, password]);
 
   return (
     <div className="container-lg">

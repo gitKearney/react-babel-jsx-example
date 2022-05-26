@@ -15,7 +15,7 @@ function sendRequest(formValues) {
     body: JSON.stringify(formValues),
   };
 
-  const URI = `http://localhost:8080`;
+  const URI = `http://localhost:3000`;
 
   const request = new Request(URI, init);
 
