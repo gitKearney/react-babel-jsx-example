@@ -19,7 +19,7 @@ function InputForm() {
 
   // event handlers - called when user makes changes, and updates our component's state
   function canBeSubmitted() {
-    let notEmpty = email.length && password.length;
+    let notEmpty = !(email.length && password.length);
     return setDisabled(notEmpty);
   }
   
